@@ -853,31 +853,19 @@ def load_datasets_with_prompts(
         normalize_features=False,
         normalization_method='dataset'
 ):
-    """
-    加载数据集
-
-    Args:
-        args: 参数
-        normalize_features: 是否归一化
-        normalization_method: 'dataset' 或 'graph'
-    """
 
     dataset_mapping = {
         "DRWeiboV3": {"dataset": TreeDataset("../ACL/Data/DRWeiboV3/"), "prompt_key": "DRWeiboV3_prompt"},
         "Weibo": {"dataset": TreeDataset("../ACL/Data/Weibo/"), "prompt_key": "Weibo_prompt"},
         "WeiboCOVID19": {"dataset": CovidDataset("../ACL/Data/Weibo-COVID19/Weibograph"), "prompt_key": "W19_prompt"},
         "PHEME": {"dataset": TreeDataset_PHEME("../ACL/Data/pheme/"), "prompt_key": "PHEME_prompt"},
-        # "Politifact": {"dataset": TreeDataset_UPFD("../ACL/Data/politifact/"), "prompt_key": "Politifact_prompt"},
-        # "Gossipcop": {"dataset": TreeDataset_UPFD("../ACL/Data/gossipcop/"), "prompt_key": "Gossipcop_prompt"},
         "TwitterCOVID19": {"dataset": CovidDataset("../ACL/Data/Twitter-COVID19/Twittergraph"),
                            "prompt_key": "T19_prompt"},
-        # "Twitter15-tfidf": {"dataset": TreeDataset("../ACL/Data/Twitter15-tfidf/"), "prompt_key": "en_prompt"}
     }
 
     target_info = dataset_mapping[args.dataset]
     train_datasets = {k: v for k, v in dataset_mapping.items() if k != args.dataset}
 
-    # 归一化
     if normalize_features:
         print(f"\nNormalization (method={normalization_method})")
         print("=" * 60)
@@ -989,4 +977,5 @@ if __name__ == '__main__':
     # root_path = "D://ACLR4RUMOR_datasets//Twitter-COVID19//Twitter-COVID19//Twittergraph"
     # data = CovidDataset('./Data/Twitter-COVID19/Twittergraph')
     data = TreeDataset("./Data/Weibo/")
+
     print(data[0])
